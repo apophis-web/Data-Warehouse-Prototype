@@ -1,0 +1,65 @@
+DROP TABLE if exists facttable;
+DROP TABLE if exists supplier;
+DROP TABLE if exists product;
+DROP TABLE if exists date_;
+DROP TABLE if exists customer;
+DROP TABLE if exists store;
+
+CREATE TABLE product (
+PRODUCT_ID VARCHAR(10) NOT NULL,
+PRODUCT_NAME VARCHAR(30) NOT NULL,
+PRICE float(50) NOT NULL,
+PRIMARY KEY ( PRODUCT_ID )
+); 
+
+CREATE TABLE supplier (
+SUPPLIER_ID VARCHAR(10) NOT NULL,
+SUPPLIER_NAME VARCHAR(30) NOT NULL,
+PRIMARY KEY ( SUPPLIER_ID )
+);
+
+CREATE TABLE date_ (
+datee date NOT NULL,
+day_ VARCHAR(10) NOT NULL,
+month_ VARCHAR(10) NOT NULL,
+quarter_ decimal(10) NOT NULL,
+PRIMARY KEY (datee)
+);
+
+CREATE TABLE customer (
+CUSTOMER_ID VARCHAR(10) NOT NULL,
+CUSTOMER_NAME VARCHAR(30) NOT NULL,
+PRIMARY KEY (CUSTOMER_ID)
+);
+
+CREATE TABLE store (
+STORE_ID VARCHAR(10) NOT NULL,
+STORE_NAME VARCHAR(30) NOT NULL,
+PRIMARY KEY (STORE_ID)
+);
+
+CREATE TABLE facttable (
+sales float(20) NOT NULL, 
+quantity decimal(10) NOT NULL,
+FK_PRODUCT_ID VARCHAR(10) NOT NULL,
+FK_SUPPLIER_ID VARCHAR(10) NOT NULL,
+FK_date date NOT NULL,
+FK_STORE_ID VARCHAR(10) NOT NULL,
+FK_CUSTOMER_ID VARCHAR(10) NOT NULL,
+FOREIGN KEY (FK_PRODUCT_ID) REFERENCES product(PRODUCT_ID),
+FOREIGN KEY (FK_SUPPLIER_ID) REFERENCES supplier(SUPPLIER_ID),
+FOREIGN KEY (FK_date) REFERENCES date_(datee),
+FOREIGN KEY (FK_STORE_ID) REFERENCES store(STORE_ID),
+FOREIGN KEY (FK_CUSTOMER_ID) REFERENCES customer(CUSTOMER_ID),
+PRIMARY KEY (FK_PRODUCT_ID, FK_SUPPLIER_ID, FK_date, FK_STORE_ID, FK_CUSTOMER_ID)
+);
+
+
+
+select * from facttable;
+-- select * from product;
+-- select * from supplier;
+-- select * from date_;
+-- select * from customer;
+-- select * from store;
+-- select distinct SUPPLIER_NAME from masterdata;
